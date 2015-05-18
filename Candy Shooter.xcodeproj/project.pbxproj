@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3CBF821B06A10200F8216E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B3CBF811B06A10200F8216E /* Images.xcassets */; };
 		0B8896421AF9355F00196849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8896411AF9355F00196849 /* AppDelegate.swift */; };
 		0B8896441AF9355F00196849 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B8896431AF9355F00196849 /* GameScene.sks */; };
 		0B8896461AF9355F00196849 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8896451AF9355F00196849 /* GameScene.swift */; };
 		0B8896481AF9355F00196849 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8896471AF9355F00196849 /* GameViewController.swift */; };
 		0B88964B1AF9355F00196849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8896491AF9355F00196849 /* Main.storyboard */; };
-		0B88964D1AF9355F00196849 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B88964C1AF9355F00196849 /* Images.xcassets */; };
 		0B8896501AF9355F00196849 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B88964E1AF9355F00196849 /* LaunchScreen.xib */; };
 		0B88965C1AF9355F00196849 /* Candy_ShooterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B88965B1AF9355F00196849 /* Candy_ShooterTests.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B3CBF811B06A10200F8216E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0B88963C1AF9355F00196849 /* Candy Shooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Candy Shooter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8896401AF9355F00196849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B8896411AF9355F00196849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,7 +36,6 @@
 		0B8896451AF9355F00196849 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		0B8896471AF9355F00196849 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		0B88964A1AF9355F00196849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0B88964C1AF9355F00196849 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0B88964F1AF9355F00196849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0B8896551AF9355F00196849 /* Candy ShooterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Candy ShooterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B88965A1AF9355F00196849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 				0B8896451AF9355F00196849 /* GameScene.swift */,
 				0B8896471AF9355F00196849 /* GameViewController.swift */,
 				0B8896491AF9355F00196849 /* Main.storyboard */,
-				0B88964C1AF9355F00196849 /* Images.xcassets */,
+				0B3CBF811B06A10200F8216E /* Images.xcassets */,
 				0B88964E1AF9355F00196849 /* LaunchScreen.xib */,
 				0B88963F1AF9355F00196849 /* Supporting Files */,
 			);
@@ -199,7 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B8896501AF9355F00196849 /* LaunchScreen.xib in Resources */,
-				0B88964D1AF9355F00196849 /* Images.xcassets in Resources */,
+				0B3CBF821B06A10200F8216E /* Images.xcassets in Resources */,
 				0B8896441AF9355F00196849 /* GameScene.sks in Resources */,
 				0B88964B1AF9355F00196849 /* Main.storyboard in Resources */,
 			);
@@ -419,6 +419,7 @@
 				0B8896611AF9355F00196849 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B8896621AF9355F00196849 /* Build configuration list for PBXNativeTarget "Candy ShooterTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +428,7 @@
 				0B8896641AF9355F00196849 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
