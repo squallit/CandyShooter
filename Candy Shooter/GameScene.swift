@@ -27,11 +27,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var redExplosionAction : SKAction!
     var pinkExplosionAction : SKAction!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         
         //Setup PhysicWorld
-        self.physicsWorld.gravity = CGVectorMake(0.0, -0.5)
+        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.5)
         self.physicsWorld.contactDelegate = self
         
    
@@ -43,16 +43,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Setup Edges
         let leftEdge = SKNode()
-        leftEdge.position = CGPointZero
-        leftEdge.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointZero, toPoint: CGPointMake(0.0, self.size.height))
+        leftEdge.position = CGPoint.zero
+        leftEdge.physicsBody = SKPhysicsBody(edgeFrom: CGPoint.zero, to: CGPoint(x: 0.0, y: self.size.height))
         leftEdge.physicsBody?.friction = 0.0
         leftEdge.physicsBody?.restitution = 1.0
         leftEdge.physicsBody?.categoryBitMask = EDGE_CATEGORY
         self.addChild(leftEdge)
         
         let rightEdge = SKNode()
-        rightEdge.position = CGPointMake(self.size.width, 0.0)
-        rightEdge.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointZero, toPoint: CGPointMake(0.0, self.size.height))
+        rightEdge.position = CGPoint(x: self.size.width, y: 0.0)
+        rightEdge.physicsBody = SKPhysicsBody(edgeFrom: CGPoint.zero, to: CGPoint(x: 0.0, y: self.size.height))
         rightEdge.physicsBody?.friction = 0.0
         rightEdge.physicsBody?.restitution = 1.0
         rightEdge.physicsBody?.categoryBitMask = EDGE_CATEGORY
@@ -62,40 +62,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.createAmmoCandy()
         
         //Create lines of target candies
-        let targetCandyAction = SKAction.sequence([SKAction.waitForDuration(2.0, withRange: 1.0), SKAction.runBlock({ self.createTargetCandy() })])
-        self.runAction(SKAction.repeatActionForever(targetCandyAction))
+        let targetCandyAction = SKAction.sequence([SKAction.wait(forDuration: 2.0, withRange: 1.0), SKAction.run({ self.createTargetCandy() })])
+        self.run(SKAction.repeatForever(targetCandyAction))
         
         //Setup Explosion Texture
         let blueExplosionTexture : [SKTexture] = [SKTexture(imageNamed: "explosionblue01"), SKTexture(imageNamed: "explosionblue02"), SKTexture(imageNamed: "explosionblue03"), SKTexture(imageNamed: "explosionblue04"), SKTexture(imageNamed: "explosionblue05")]
-        blueExplosionAction = SKAction.animateWithTextures(blueExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
+        blueExplosionAction = SKAction.animate(with: blueExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
         
         let greenExplosionTexture : [SKTexture] = [SKTexture(imageNamed: "explosiongreen01"), SKTexture(imageNamed: "explosiongreen02"), SKTexture(imageNamed: "explosiongreen03"), SKTexture(imageNamed: "explosiongreen04"), SKTexture(imageNamed: "explosiongreen05")]
-        greenExplosionAction = SKAction.animateWithTextures(greenExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
+        greenExplosionAction = SKAction.animate(with: greenExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
         
         let redExplosionTexture : [SKTexture] = [SKTexture(imageNamed: "explosionred01"), SKTexture(imageNamed: "explosionred02"), SKTexture(imageNamed: "explosionred03"), SKTexture(imageNamed: "explosionred04"), SKTexture(imageNamed: "explosionred05")]
-        redExplosionAction = SKAction.animateWithTextures(redExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
+        redExplosionAction = SKAction.animate(with: redExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
         
         let pinkExplosionTexture : [SKTexture] = [SKTexture(imageNamed: "explosionpink01"), SKTexture(imageNamed: "explosionpink02"), SKTexture(imageNamed: "explosionpink03"), SKTexture(imageNamed: "explosionpink04"), SKTexture(imageNamed: "explosionpink05")]
-        pinkExplosionAction = SKAction.animateWithTextures(pinkExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
+        pinkExplosionAction = SKAction.animate(with: pinkExplosionTexture, timePerFrame: 0.1, resize: true, restore: false)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
-        
         for touch in (touches as! Set<UITouch>) {
-            let location = touch.locationInNode(self)
-            let ammoCandyVector = normalizeVector(CGVectorMake(location.x - ammoCandy.position.x, location.y - ammoCandy.position.y))
-            ammoCandy.physicsBody?.velocity = CGVectorMake(ammoCandyVector.dx * AMMO_CANDY_SPEED, ammoCandyVector.dy * AMMO_CANDY_SPEED)
+            let location = touch.location(in: self)
+            let ammoCandyVector = normalizeVector(CGVector(dx: location.x - ammoCandy.position.x, dy: location.y - ammoCandy.position.y))
+            ammoCandy.physicsBody?.velocity = CGVector(dx: ammoCandyVector.dx * AMMO_CANDY_SPEED, dy: ammoCandyVector.dy * AMMO_CANDY_SPEED)
         }
     }
     
-    func normalizeVector (vector: CGVector) -> CGVector {
+    func normalizeVector (_ vector: CGVector) -> CGVector {
         let scalar : CGFloat = sqrt(vector.dx * vector.dx + vector.dy * vector.dy)
-        let normalizedVector : CGVector = CGVectorMake(vector.dx / scalar, vector.dy / scalar)
+        let normalizedVector : CGVector = CGVector(dx: vector.dx / scalar, dy: vector.dy / scalar)
         return normalizedVector
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
         //Remove ammoCandy if it's out of the screen
@@ -109,7 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createAmmoCandy () {
         //Setup ammoCandy
         ammoCandy = SKSpriteNode(imageNamed: "mm_blue")
-        ammoCandy.position = CGPointMake(self.size.width / 2, 30)
+        ammoCandy.position = CGPoint(x: self.size.width / 2, y: 30)
         ammoCandy.physicsBody = SKPhysicsBody(circleOfRadius: ammoCandy.size.width / 2)
         ammoCandy.physicsBody?.friction = 0.0
         ammoCandy.physicsBody?.linearDamping = 0.0
@@ -152,24 +151,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //Get random X position
-        targetCandy.position = CGPointMake(self.randomWithRange(targetCandy.size.width / 2, upper: self.size.width - targetCandy.size.width / 2), self.size.height + targetCandy.size.height / 2)
+        targetCandy.position = CGPoint(x: self.randomWithRange(targetCandy.size.width / 2, upper: self.size.width - targetCandy.size.width / 2), y: self.size.height + targetCandy.size.height / 2)
         targetCandy.physicsBody = SKPhysicsBody(circleOfRadius: targetCandy.size.width / 2)
         targetCandy.physicsBody?.linearDamping = 0.0
         targetCandy.physicsBody?.affectedByGravity = true
         targetCandy.physicsBody?.categoryBitMask = TARGET_CANDY_CATEGORY
         targetCandy.physicsBody?.collisionBitMask = TARGET_CANDY_CATEGORY | EDGE_CATEGORY
         self.addChild(targetCandy)
-        println(targetCandy.userData?.valueForKey(COLOR))
+        print(targetCandy.userData?.value(forKey: COLOR))
 
 
     }
     
-    func randomWithRange (lower : CGFloat, upper : CGFloat) -> CGFloat {
+    func randomWithRange (_ lower : CGFloat, upper : CGFloat) -> CGFloat {
         //UINT32_MAX = 2,147,483,647
         return lower + (upper - lower) * (CGFloat(arc4random_uniform(UINT32_MAX)) / CGFloat(UINT32_MAX))
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         var firstBody : SKPhysicsBody!
         var secondBody : SKPhysicsBody!
         if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
@@ -187,17 +186,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func explodeCandy (candy : SKSpriteNode) {
+    func explodeCandy (_ candy : SKSpriteNode) {
         let candyExplosion : SKAction!
-        switch candy.userData?.valueForKey(COLOR) as! String {
+        switch candy.userData?.value(forKey: COLOR) as! String {
             case "Blue" :   candyExplosion = blueExplosionAction
             case "Green" :  candyExplosion = greenExplosionAction
             case "Red" :    candyExplosion = redExplosionAction
             default :       candyExplosion = pinkExplosionAction
         }
         
-        candy.physicsBody?.dynamic = false
-        candy.runAction(SKAction.sequence([candyExplosion, SKAction.runBlock({ () -> Void in
+        candy.physicsBody?.isDynamic = false
+        candy.run(SKAction.sequence([candyExplosion, SKAction.run({ () -> Void in
             candy.removeFromParent()
         })]))
     }
